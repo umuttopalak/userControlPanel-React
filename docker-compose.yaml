@@ -17,7 +17,7 @@ services:
 
   react-app:
     container_name: react-app
-    image: user_react_image:latest
+    image: react-image:latest
     build:
       context: .
       target: development
@@ -25,15 +25,6 @@ services:
       - ./src:/app/src
     ports:
       - 3000:80
-
-  api:
-    image: 3eb4f7942eb61a37132e2b9673fe08c36082bc271386961e82c7998e786dae47
-    container_name: api
-    restart: always
-    ports:
-      - 44336:80
-
-
 
   # pgadmin:
   #   container_name: pgadmin

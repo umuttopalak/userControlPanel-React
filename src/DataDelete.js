@@ -30,52 +30,66 @@ const DataAdd = () => {
     // }
 
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const handleSubmit = () => {
+
         axios({
             method: 'delete',
             url: `https://localhost:44336/User/${id}`,
             headers: {},
 
         })
-            .then(res => console.log("Deleted", res))
-            .catch(err => console.log(err))
-
+            .then(res => {
+                console.log("Deleted", res)
+                alert("Çalışan kaydı silindi!")
+                
+            }
+            )
+            .catch(err => {
+                console.log(err);
+                if (err.request.status == 0) {
+                    alert("Database'e erişilemiyor!")
+                }
+                if (err.request.status == 404) {
+                    alert("Çalışan kaydı bulunmamaktadır!!")
+                }
+            })
     }
 
-    const userCheck = (e) => {
+    const checkUser = (e) => {
         e.preventDefault();
         axios({
             method: 'get',
             url: `https://localhost:44336/User/${id}`,
             headers: {},
-
         })
+            .then(res => {
 
-            .catch(function (error) {
-                if (error.response) {
-
-                    console.log(error.response.data);
-                    console.log(error.response.status);
-                    console.log(error.response.headers);
-                } else if (error.request) {
-                    // The request was made but no response was received
-                    // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-                    // http.ClientRequest in node.js
-                    console.log(error.request);
-                } else {
-                    // Something happened in setting up the request that triggered an Error
-                    console.log('Error', error.message);
+                console.log("kullanıcı bulundu")
+                console.log(res.data);
+                if (res.data.firstName.toLowerCase() == firstname.toLowerCase() && res.data.surName.toLowerCase() == surname.toLowerCase()) {
+                    handleSubmit();
+                    document.getElementById("deleteForm").reset();
                 }
-                console.log(error.config);
-            }).then(res => {
-                handleSubmit()
+                else {
+                    alert("çalışan adı ve soyadı hatalı");
+                }
+            })
+            .catch(err => {
+                console.log(err);
+                if (err.request.status == 404) {
+                    alert("Çalışan kaydı bulunmamaktadır!!")
+                }
+                if (err.request.status == 0) {
+                    alert("Database'e erişilemiyor!")
+                }
             })
     }
 
+
+
     return (
         <div className="container">
-            <form onSubmit={handleSubmit}>
+            <form id='deleteForm' onSubmit={checkUser}>
                 <div className="border text-center">
                     <br></br><br></br>
                     <div className="input-group mb-3" >
