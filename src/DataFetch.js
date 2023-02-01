@@ -23,7 +23,7 @@ function DataFetch() {
     
     
     useEffect(() => {
-        axios.get(`https://localhost:5001/user`)
+        axios.get(`https://localhost:44336/User`)
             .then(res => {
                 
                 setPosts(res.data)

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import { render } from '@testing-library/react'
+
 
 const DataAdd = () => {
 
@@ -14,16 +16,19 @@ const DataAdd = () => {
         paddingBottom: "2%"
     }
 
+
     const [firstName, setfirstName] = useState('')
     const [surName, setsurName] = useState('')
     const [descriptor, setDescriptor] = useState('')
     const [month, setMonth] = useState()
     const [id, setId] = useState()
+  
 
     const handleSubmit = (e) => {
+        e.preventDefault();
         axios({
             method: 'post',
-            url: `https://localhost:5001/user`,
+            url: `https://localhost:44336/User`,
             headers: {},
             data: {
                 firstName,
@@ -32,13 +37,14 @@ const DataAdd = () => {
                 id,
                 month
             },
-        })
-            .then(function (response) {
-                console.log(response);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        }).catch(function (err) {
+            alert("zort")
+
+        }).then(function (response) {
+
+            console.log(response);
+
+        });
     }
 
     return (
@@ -56,16 +62,18 @@ const DataAdd = () => {
                         <input onChange={(e) => setDescriptor(e.target.value)} id="descriptor" type="text" class="form-control" placeholder="Departman" aria-label="" aria-describedby="basic-addon1" style={inputStyle} required />
                     </div>
                     <div className="input-group mb-3">
-                        <input onChange={(e) => setMonth(e.target.value)} id="month" type="text" class="form-control" placeholder="İşe" aria-label="" aria-describedby="basic-addon1" style={inputStyle} required />
+                        <input onChange={(e) => setMonth(e.target.value)} id="month" type="date" class="form-control" placeholder="İşe ALım Tarihi" aria-label="İşe Alım Tarihi" aria-describedby="basic-addon1" style={inputStyle} required />
                     </div>
                     <div className="input-group mb-3">
                         <input onChange={(e) => setId(e.target.value)} id="id" type="text" class="form-control" placeholder="Id" aria-label="" aria-describedby="basic-addon1" style={inputStyle} required />
                     </div>
                     <div className="text-left" style={buttonStyle}>
-                        <button type="submit" className="btn btn-success" >Çalışan Kaydını Tamamla</button>
+                        <button onSubmit={handleSubmit} className="btn btn-success" >Çalışan Kaydını Tamamla</button>
                     </div>
+
                 </div>
             </form>
+            
         </div>
     )
 }

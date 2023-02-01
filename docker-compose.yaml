@@ -1,0 +1,55 @@
+version: "3.9"
+services:
+  db:
+    container_name: postgres
+    image: postgres:bullseye
+    restart: always
+    network_mode: bridge
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 1234
+      PGDATA: /var/lib/postgresql/data
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  react-app:
+    container_name: react-app
+    image: user_react_image:latest
+    build:
+      context: .
+      target: development
+    volumes:
+      - ./src:/app/src
+    ports:
+      - 3000:80
+
+  api:
+    image: 3eb4f7942eb61a37132e2b9673fe08c36082bc271386961e82c7998e786dae47
+    container_name: api
+    restart: always
+    ports:
+      - 44336:80
+
+
+
+  # pgadmin:
+  #   container_name: pgadmin
+  #   image: dpage/pgadmin4:latest
+  #   restart: always
+  #   environment:
+  #     PGADMIN_DEFAULT_EMAIL: admin@topalak.com
+  #     PGADMIN_DEFAULT_PASSWORD: 1234
+  #     PGADMIN_LISTEN_PORT: 80
+  #   ports:
+  #     - "8080:80"
+  #   volumes:
+  #     - pgadmin-data:/var/lib/pgadmin
+  #   links:
+  #     - "db:postgres-server"
+
+volumes:
+  db-data:
+  #pgadmin-data:

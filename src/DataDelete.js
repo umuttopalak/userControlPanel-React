@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 
 const DataAdd = () => {
@@ -16,8 +16,6 @@ const DataAdd = () => {
 
     const [firstname, setfirstName] = useState('')
     const [surname, setsurName] = useState('')
-    const [descriptor, setDescriptor] = useState('')
-    const [month, setMonth] = useState()
     const [id, setId] = useState()
 
     //Normal Hali
@@ -36,14 +34,43 @@ const DataAdd = () => {
         e.preventDefault();
         axios({
             method: 'delete',
-            url: `https://localhost:5001/user/${id}`,
-            headers:{},
-            
-        })
-        .then(res => console.log("Deleted" , res))
-        .catch(err => console.log(err))
+            url: `https://localhost:44336/User/${id}`,
+            headers: {},
 
-        window.location.reload()
+        })
+            .then(res => console.log("Deleted", res))
+            .catch(err => console.log(err))
+
+    }
+
+    const userCheck = (e) => {
+        e.preventDefault();
+        axios({
+            method: 'get',
+            url: `https://localhost:44336/User/${id}`,
+            headers: {},
+
+        })
+
+            .catch(function (error) {
+                if (error.response) {
+
+                    console.log(error.response.data);
+                    console.log(error.response.status);
+                    console.log(error.response.headers);
+                } else if (error.request) {
+                    // The request was made but no response was received
+                    // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                    // http.ClientRequest in node.js
+                    console.log(error.request);
+                } else {
+                    // Something happened in setting up the request that triggered an Error
+                    console.log('Error', error.message);
+                }
+                console.log(error.config);
+            }).then(res => {
+                handleSubmit()
+            })
     }
 
     return (
@@ -56,9 +83,6 @@ const DataAdd = () => {
                     </div>
                     <div className="input-group mb-3">
                         <input onChange={(e) => setsurName(e.target.value)} id="surname" type="text" class="form-control" placeholder="Soyisim" aria-label="" aria-describedby="basic-addon1" style={inputStyle} required />
-                    </div>
-                    <div className="input-group mb-3">
-                        <input onChange={(e) => setDescriptor(e.target.value)} id="descriptor" type="text" class="form-control" placeholder="Bölüm" aria-label="" aria-describedby="basic-addon1" style={inputStyle} required />
                     </div>
                     <div className="input-group mb-3">
                         <input onChange={(e) => setId(e.target.value)} id="id" type="text" class="form-control" placeholder="Id" aria-label="" aria-describedby="basic-addon1" style={inputStyle} required />
