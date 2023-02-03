@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
-import { render } from '@testing-library/react'
-
 
 const DataAdd = () => {
 
@@ -38,10 +36,10 @@ const DataAdd = () => {
                 month
             },
         }).catch(function (err) {
-            alert("zort")
+            alert("")
 
         }).then(function (response) {
-
+            document.getElementById("addForm").reset();
             console.log(response);
 
         });
@@ -49,7 +47,7 @@ const DataAdd = () => {
 
     return (
         <div className="container">
-            <form onSubmit={handleSubmit}>
+            <form id='addForm' onSubmit={handleSubmit}>
                 <div className="border text-center">
                     <br></br><br></br>
                     <div className="input-group mb-3" >

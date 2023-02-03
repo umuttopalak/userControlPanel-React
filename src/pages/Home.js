@@ -1,7 +1,7 @@
-import DataFetch from "../DataFetch";
+import Mains from "../Mains";
 
 const Home = () => {
-    return <DataFetch/>
+    return(<Mains/>)
   };
   
   export default Home;

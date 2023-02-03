@@ -46,10 +46,10 @@ const DataAdd = () => {
             )
             .catch(err => {
                 console.log(err);
-                if (err.request.status == 0) {
+                if (err.request.status === 0) {
                     alert("Database'e erişilemiyor!")
                 }
-                if (err.request.status == 404) {
+                if (err.request.status === 404) {
                     alert("Çalışan kaydı bulunmamaktadır!!")
                 }
             })
@@ -66,7 +66,7 @@ const DataAdd = () => {
 
                 console.log("kullanıcı bulundu")
                 console.log(res.data);
-                if (res.data.firstName.toLowerCase() == firstname.toLowerCase() && res.data.surName.toLowerCase() == surname.toLowerCase()) {
+                if (res.data.firstName.toLowerCase() === firstname.toLowerCase() && res.data.surName.toLowerCase() === surname.toLowerCase()) {
                     handleSubmit();
                     document.getElementById("deleteForm").reset();
                 }
@@ -76,10 +76,10 @@ const DataAdd = () => {
             })
             .catch(err => {
                 console.log(err);
-                if (err.request.status == 404) {
+                if (err.request.status === 404) {
                     alert("Çalışan kaydı bulunmamaktadır!!")
                 }
-                if (err.request.status == 0) {
+                if (err.request.status === 0) {
                     alert("Database'e erişilemiyor!")
                 }
             })
