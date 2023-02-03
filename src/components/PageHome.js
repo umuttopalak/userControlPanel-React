@@ -1,9 +1,6 @@
 import React, { useState } from 'react'
-import axios from 'axios'
 
-const Mains = () => {
-
-
+function PageHome(){
 
     return (
         <div className="container">
@@ -13,4 +10,4 @@ const Mains = () => {
     )
 }
 
-export default Mains
+export default PageHome

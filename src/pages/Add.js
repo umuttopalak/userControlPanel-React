@@ -1,4 +1,4 @@
-import DataAdd from "../DataAdd";
+import DataAdd from "../components/DataAdd";
 
 const Add = () => {
   return (

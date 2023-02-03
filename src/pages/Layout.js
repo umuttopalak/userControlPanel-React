@@ -1,9 +1,14 @@
-import { Outlet, Link } from "react-router-dom";
-const Layout = () => {
+import { Outlet, Link, Route, Routes } from "react-router-dom";
+import {
+    BrowserRouter as Router, Switch
+} from "react-router-dom";
 
-    const buttonDivStyle = {
-        margin: "auto",
-    }
+import PageHome from "../components/PageHome";
+import DataAdd from "../components/DataAdd";
+import DataDele from "../components/DataDelete";
+import DataFetch from "../components/DataFetch";
+
+export default function Layout() {
 
     const containerStyle = {
         padding: "5px",
@@ -20,29 +25,26 @@ const Layout = () => {
         width: "80%"
     }
 
-
     return (
         <>
             <div className="App" >
-
                 <div className="container text-center " style={containerStyle}>
                     <div className="container " style={containerStyle} >
                         <div className="row" style={tableContainerStyle}>
-                            
                             <div className="col-lg-3">
-                                <a><Link to="/" className="btn btn-warning" style={butonStyle}>Ana Sayfa</Link></a>
+                                <Link to="/" className="btn btn-primary" style={butonStyle}>Ana Sayfa</Link>
                             </div>
 
                             <div className="col-lg-3">
-                                <a><Link to="/show" className="btn btn-primary" style={butonStyle}>Çalışanları Göster</Link></a>
+                                <Link to="/show" className="btn btn-secondary" style={butonStyle}>Çalışanları Göster</Link>
                             </div>
 
                             <div className="col-lg-3">
-                                <a><Link to="/add" className="btn btn-success" style={butonStyle}>Çalışan Ekle</Link></a>
+                                <Link to="/add" className="btn btn-success" style={butonStyle}>Çalışan Ekle</Link>
                             </div>
 
                             <div className="col-lg-3">
-                                <a><Link to="/delete" className="btn btn-danger" style={butonStyle}>Çalışan Sil</Link></a>
+                                <Link to="/delete" className="btn btn-danger" style={butonStyle}>Çalışan Sil</Link>
                             </div>
                         </div>
                         <br></br><br></br>
@@ -50,8 +52,7 @@ const Layout = () => {
                 </div>
             </div >
             <Outlet />
+
         </>
     )
 };
-
-export default Layout;

@@ -1,4 +1,5 @@
-import DataDelete from "../DataDelete"
+import DataDelete from "../components/DataDelete";
+
 const Delete = () => {
 
   const inputStyle = {

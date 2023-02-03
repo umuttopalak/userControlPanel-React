@@ -1,10 +1,7 @@
-import DataFetch from "../DataFetch.js"
+import DataFetch from "../components/DataFetch";
 
 const Show = () => {
-   
-    return (
-        <DataFetch/>
-    );
-}
-
-export default Show;
+    return(<DataFetch/>)
+  };
+  
+  export default Show;

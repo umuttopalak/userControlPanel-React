@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Add from "./pages/Add";
 import Delete from "./pages/Delete";
 import Layout from "./pages/Layout";
+import Show from "./pages/Show";
 
 class App extends Component {
 
@@ -17,6 +18,7 @@ class App extends Component {
               <Route index element={<Home />} />
               <Route path="add" element={<Add />} />
               <Route path="delete" element={<Delete />} />
+              <Route path="show" element={<Show/>} />
             </Route>
           </Routes>
         </Router>
